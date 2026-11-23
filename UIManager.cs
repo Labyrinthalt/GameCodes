@@ -1,0 +1,56 @@
+using UnityEngine;
+
+public class UIManager : MonoBehaviour
+{
+    [Header("Menu GameObjects")]
+    [SerializeField] private GameObject inventoryUI;
+    [SerializeField] private GameObject worldMapUI;
+    [SerializeField] private GameObject settingsUI;
+
+    void Update()
+    {
+        // Toggle Map (M)
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            ToggleMenu(worldMapUI);
+        }
+
+        // Toggle Inventory (I)
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            ToggleMenu(inventoryUI);
+        }
+
+        // Toggle Settings (Esc)
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ToggleMenu(settingsUI);
+        }
+    }
+
+    /// Opens the requested menu and closes all others. 
+    /// If the requested menu is already open, it closes it.
+    public void ToggleMenu(GameObject menuToToggle)
+    {
+        if (menuToToggle == null) return;
+
+        bool isCurrentlyActive = menuToToggle.activeSelf;
+
+        // Close all managed menus first
+        CloseAllMenus();
+
+        // If it was closed before, open it now
+        if (!isCurrentlyActive)
+        {
+            menuToToggle.SetActive(true);
+        }
+    }
+
+    /// Deactivates all UI menus.
+    public void CloseAllMenus()
+    {
+        if (inventoryUI != null) inventoryUI.SetActive(false);
+        if (worldMapUI != null) worldMapUI.SetActive(false);
+        if (settingsUI != null) settingsUI.SetActive(false);
+    }
+}
