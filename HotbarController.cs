@@ -79,7 +79,6 @@ public class HotbarController : MonoBehaviour
             }
         }
 
-        // Otherwise place into the first empty hotbar slot
         foreach (Transform slotTransform in hotbarPanel.transform)
         {
             Slot slot = slotTransform.GetComponent<Slot>();
